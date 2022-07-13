@@ -11,7 +11,22 @@ create table user (
 	email varchar(64),
 	nickname varchar(64),
 	pet varchar(64),
+	state char(1),
 	primary key (id)
+) Engine=InnoDB;
+
+create table team (
+	id bigint,
+	name varchar(64),
+    state char(1),
+	primary key (id)
+) Engine=InnoDB;
+
+create table team_member (
+	team bigint,
+	user bigint,
+	role char(1),
+	primary key (team, user)
 ) Engine=InnoDB;
 
 create table name_user_map (

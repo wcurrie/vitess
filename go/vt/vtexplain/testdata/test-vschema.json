@@ -65,6 +65,22 @@
 					}
 				]
 			},
+			"team": {
+				"column_vindexes": [
+					{
+						"column": "id",
+						"name": "hash"
+					}
+				]
+			},
+			"team_member": {
+				"column_vindexes": [
+					{
+						"column": "team",
+						"name": "hash"
+					}
+				]
+			},
 			"music": {
 				"column_vindexes": [
 					{
