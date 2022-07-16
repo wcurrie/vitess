@@ -27,6 +27,15 @@
     },
     "binary": {
       "type": "binary"
+    },
+    "email_user_map": {
+      "type": "consistent_lookup_unique",
+      "params": {
+        "table": "email_user_map",
+        "from": "email",
+        "to": "keyspace_id"
+      },
+      "owner": "user"
     }
   },
   "tables": {
@@ -74,6 +83,42 @@
         "column": "oname",
         "name": "unicode_loose_md5"
       }]
+    },
+    "user": {
+      "column_vindexes": [
+        {
+          "column": "id",
+          "name": "hash"
+        },
+        {
+          "column": "email",
+          "name": "email_user_map"
+        }
+      ]
+    },
+    "team": {
+      "column_vindexes": [
+        {
+          "column": "id",
+          "name": "hash"
+        }
+      ]
+    },
+    "team_member": {
+      "column_vindexes": [
+        {
+          "column": "team",
+          "name": "hash"
+        }
+      ]
+    },
+    "email_user_map": {
+      "column_vindexes": [
+        {
+          "column": "email",
+          "name": "unicode_loose_md5"
+        }
+      ]
     }
   }
 }
