@@ -1,0 +1,1 @@
+select user.id, team.id, team_member.role from user join team_member on user.id = team_member.user join team on team_member.team = team.id where user.name = 'Bob' and user.state = 'A' and team.state = 'A';

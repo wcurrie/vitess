@@ -1,0 +1,10 @@
+----------------------------------------------------------------------
+select user.id, team.id, team_member.role from user join team_member on user.id = team_member.user join team on team_member.team = team.id where user.name = 'Bob' and user.state = 'A' and team.state = 'A'
+
+1 ks_sharded/c0-: select `name`, user_id from name_user_map where `name` in ('Bob') limit 10001
+2 ks_sharded/-40: select `user`.id from `user` where `user`.`name` = 'Bob' and `user`.state = 'A' limit 10001
+3 ks_sharded/-40: select team.id, team_member.role from team_member, team where team_member.`user` = 1 and team_member.team = team._id and team.state = 'A' limit 10001
+3 ks_sharded/40-80: select team.id, team_member.role from team_member, team where team_member.`user` = 1 and team_member.team = team._id and team.state = 'A' limit 10001
+3 ks_sharded/80-c0: select team.id, team_member.role from team_member, team where team_member.`user` = 1 and team_member.team = team._id and team.state = 'A' limit 10001
+3 ks_sharded/c0-: select team.id, team_member.role from team_member, team where team_member.`user` = 1 and team_member.team = team._id  and team.state = 'A' limit 10001
+----------------------------------------------------------------------
